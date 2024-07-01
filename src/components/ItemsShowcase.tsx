@@ -1,4 +1,10 @@
-export const ItemsShowcase = ({ items }) => {
+import { ShowcaseItem } from 'types';
+
+type ItemsShowcaseProps = {
+    items: ShowcaseItem[];
+};
+
+export const ItemsShowcase = ({ items }: ItemsShowcaseProps) => {
     return (
         <div className="flex justify-center items-center">
             <div className="grid grid-cols-2 gap-8 w-8/12">

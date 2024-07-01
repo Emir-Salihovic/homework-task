@@ -1,6 +1,6 @@
 import './styles.css';
 
-import { Landing } from './components/landing/Landing.js';
+import { Landing } from '@homework-task/components/landing/Landing';
 
 function App() {
     return (

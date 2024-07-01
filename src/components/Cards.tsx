@@ -1,8 +1,13 @@
 import clsx from 'clsx';
 
-import { Button } from './Button.js';
+import { Button } from '@homework-task/components/Button';
+import { Card } from 'types';
 
-export const Cards = ({ cards }) => {
+type CardsProps = {
+    cards: Card[];
+};
+
+export const Cards = ({ cards }: CardsProps) => {
     return (
         <div className={clsx('flex', 'justify-center', 'items-center')}>
             <div className={clsx('grid', 'grid-cols-2', 'gap-8', 'w-8/12')}>

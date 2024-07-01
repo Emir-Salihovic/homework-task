@@ -1,4 +1,9 @@
-export const Hero = ({ title, image }) => {
+type HeroProps = {
+    title: string;
+    image: string;
+};
+
+export const Hero = ({ title, image }: HeroProps) => {
     return (
         <div className="flex row justify-center items-center gap-4 h-screen">
             <div className="w-4/12">
