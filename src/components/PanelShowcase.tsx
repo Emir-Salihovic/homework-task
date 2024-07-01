@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+
 import { PanelShowcaseItem } from 'types';
 
 type PanelShowcaseProps = {

@@ -1,4 +1,6 @@
-declare const __CWD__: string;
+declare global {
+    let __CWD__: string;
+}
 
 export type Card = {
     title: string;
