@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import ReactDOM from 'react-dom/client';
 
 import App from '@homework-task/App';
@@ -10,8 +12,14 @@ if (!rootElement) {
     throw new Error("No element with id 'root' found");
 }
 
+// Create a client
+const queryClient = new QueryClient();
+
 ReactDOM.createRoot(rootElement).render(
     <React.StrictMode>
-        <App />
+        <QueryClientProvider client={queryClient}>
+            <ReactQueryDevtools initialIsOpen={false} />
+            <App />
+        </QueryClientProvider>
     </React.StrictMode>
 );
