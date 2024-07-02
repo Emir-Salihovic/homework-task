@@ -2,23 +2,26 @@ import React from 'react';
 
 import { useQuery, QueryKey } from '@tanstack/react-query';
 
-import { fetchData } from '@homework-task/lib/api';
+import { fetchData } from '@homework-task/lib/api/users';
 
 interface ListProps<T> {
     queryKey: QueryKey;
-    url: string;
     renderItem: (item: T) => React.ReactNode;
     listTitle: string;
 }
 
-const List = <T,>({ queryKey, url, renderItem, listTitle }: ListProps<T>) => {
+const List = <T,>({ queryKey, renderItem, listTitle }: ListProps<T>) => {
     const { data, isLoading, isError } = useQuery<T[], Error>({
         queryKey,
-        queryFn: () => fetchData<T[]>(url),
+        queryFn: () => fetchData<T[]>(),
     });
 
     if (isError) {
-        return <div>Error fetching data...</div>;
+        return (
+            <div className="text-2xl text-center text-red">
+                Error fetching data...
+            </div>
+        );
     }
 
     if (isLoading) {

@@ -1,3 +1,10 @@
+import {
+    FieldErrors,
+    FieldValues,
+    UseFormRegister,
+    useForm,
+} from 'react-hook-form';
+
 declare global {
     let __CWD__: string;
 }
@@ -29,3 +36,13 @@ export type User = {
     email: string;
     phone: string;
 };
+
+export interface RenderFormProps<T extends FieldValues> {
+    register: UseFormRegister<T>;
+    errors: FieldErrors<T>;
+}
+
+interface FormProps<T extends FieldValues> {
+    register: ReturnType<typeof useForm<T>>['register'];
+    errors: ReturnType<typeof useForm<T>>['formState']['errors'];
+}

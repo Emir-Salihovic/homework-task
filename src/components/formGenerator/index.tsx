@@ -1,15 +1,12 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import {
-    FieldErrors,
-    FieldValues,
-    SubmitHandler,
-    UseFormRegister,
-    useForm,
-} from 'react-hook-form';
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { ZodSchema } from 'zod';
 
 import { handleZodErrors } from '@homework-task/helpers/handleZodErrors';
+import { RenderFormProps } from 'types';
+
+import { Button } from '../Button';
 
 /**
  * @description Props for the FormGenerator component.
@@ -21,10 +18,7 @@ interface FormGeneratorProps<T extends FieldValues> {
     mutationKey: string[];
     validationSchema: ZodSchema<T>;
     useMutationFn: (data?: T) => Promise<void>;
-    renderForm: (props: {
-        register: UseFormRegister<T>;
-        errors: FieldErrors<T>;
-    }) => React.ReactNode;
+    renderForm: (props: RenderFormProps<T>) => React.ReactNode;
 }
 
 /**
@@ -85,22 +79,15 @@ const FormGenerator = <T extends FieldValues>({
     if (mutation.isError) {
         return (
             <div className="text-center flex flex-col items-center gap-2 my-2">
-                <span className="text-4xl text-red-500">
-                    Something went wrong!
-                </span>
-                <button
-                    className="bg-primary text-white rounded-md p-2 w-[100px]"
-                    onClick={() => mutation.reset()}
-                >
-                    Reset
-                </button>
+                <span className="text-4xl text-red">Something went wrong!</span>
+                <Button onClick={() => mutation.reset()}>Reset</Button>
             </div>
         );
     }
 
     return (
         <form
-            className="max-w-md mx-auto mt-8 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+            className="w-[80%] md:w-[50%] mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
             onSubmit={(event) => void handleSubmit(onSubmit)(event)}
         >
             {formTitle && (
