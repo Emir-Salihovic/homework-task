@@ -4,11 +4,11 @@ import { useQuery, QueryKey } from '@tanstack/react-query';
 
 import { fetchData } from '@homework-task/lib/api/users';
 
-interface ListProps<T> {
+type ListProps<T> = {
     queryKey: QueryKey;
     renderItem: (item: T) => React.ReactNode;
     listTitle: string;
-}
+};
 
 const List = <T,>({ queryKey, renderItem, listTitle }: ListProps<T>) => {
     const { data, isLoading, isError } = useQuery<T[], Error>({

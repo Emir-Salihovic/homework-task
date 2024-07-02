@@ -1,9 +1,9 @@
 import clsx from 'clsx';
 
-export interface FooterProps {
+export type FooterProps = {
     text: string;
-    styles?: string; // Allow Tailwind classes as props
-}
+    styles?: string;
+};
 
 const Footer: React.FC<FooterProps> = ({ text, styles }) => (
     <footer className={clsx('p-4', styles)}>

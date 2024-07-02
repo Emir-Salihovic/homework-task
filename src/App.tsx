@@ -6,7 +6,6 @@ import List from './components/list';
 import './styles.css';
 import PageGenerator from './components/pageGenerator';
 import { createPostMutation, postValidationSchema } from './lib/api/posts';
-// import { Landing } from './components/landing/Landing';
 
 type FormData = {
     title: string;
@@ -113,10 +112,22 @@ const config = [
     {
         type: 'componentTrustBar',
         props: {
+            images: [
+                '/media/cats/cat_2.png',
+                '/media/cats/cat_1.png',
+                '/media/cats/cat_3.png',
+                '/media/cats/cat_4.png',
+                '/media/cats/cat_5.png',
+                '/media/cats/cat_6.png',
+                '/media/cats/cat_7.png',
+                '/media/cats/cat_8.png',
+                '/media/cats/cat_9.png',
+                '/media/cats/cat_10.png',
+            ],
             title: 'Trust Bar',
-            description:
-                'This is a trust bar to showcase how the page generator works without a layout',
-            styles: 'bg-yellow-100 p-4 w-[400px] hidden lg:block',
+            subtitle:
+                'This is a component to showcase how the page generator works without a layout',
+            styles: 'p-4 hidden lg:block max-w-[400px]',
         },
     },
 ];
@@ -138,7 +149,6 @@ function App() {
     return (
         <main>
             <PageGenerator config={config} containerStyles="flex" />
-            {/* <Landing /> */}
         </main>
     );
 }

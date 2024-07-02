@@ -1,7 +1,7 @@
-export interface LayoutSectionComponentProps {
+export type LayoutSectionComponentProps = {
     styles?: string;
     children: React.ReactNode;
-}
+};
 
 const LayoutSection: React.FC<LayoutSectionComponentProps> = ({
     styles,

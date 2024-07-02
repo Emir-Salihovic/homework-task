@@ -1,9 +1,9 @@
 import clsx from 'clsx';
 
-export interface SidebarProps {
+export type SidebarProps = {
     items: string[];
-    styles?: string; // Allow Tailwind classes as props
-}
+    styles?: string;
+};
 
 const Sidebar: React.FC<SidebarProps> = ({ items, styles }) => (
     <aside className={clsx('p-4', styles)}>

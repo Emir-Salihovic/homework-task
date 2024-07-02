@@ -11,7 +11,7 @@ import { Button } from '../Button';
 /**
  * @description Props for the FormGenerator component.
  */
-interface FormGeneratorProps<T extends FieldValues> {
+type FormGeneratorProps<T extends FieldValues> = {
     formTitle?: string;
     successMessage?: string;
     invalidateQueries?: string[];
@@ -19,7 +19,7 @@ interface FormGeneratorProps<T extends FieldValues> {
     validationSchema: ZodSchema<T>;
     useMutationFn: (data?: T) => Promise<void>;
     renderForm: (props: RenderFormProps<T>) => React.ReactNode;
-}
+};
 
 /**
  * @description FormGenerator component generates a form based on the provided props and handles form submission.

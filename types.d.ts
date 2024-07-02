@@ -37,12 +37,12 @@ export type User = {
     phone: string;
 };
 
-export interface RenderFormProps<T extends FieldValues> {
+export type RenderFormProps<T extends FieldValues> = {
     register: UseFormRegister<T>;
     errors: FieldErrors<T>;
-}
+};
 
-interface FormProps<T extends FieldValues> {
+type FormProps<T extends FieldValues> = {
     register: ReturnType<typeof useForm<T>>['register'];
     errors: ReturnType<typeof useForm<T>>['formState']['errors'];
-}
+};

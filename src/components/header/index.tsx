@@ -1,10 +1,10 @@
 import clsx from 'clsx';
 
-export interface HeaderProps {
+export type HeaderProps = {
     title: string;
     subtitle: string;
-    styles?: string; // Allow Tailwind classes as props
-}
+    styles?: string;
+};
 
 const Header: React.FC<HeaderProps> = ({ title, subtitle, styles }) => (
     <header className={clsx('bg-primary p-4', styles)}>

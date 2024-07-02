@@ -2,46 +2,44 @@ import clsx from 'clsx';
 
 import LayoutSection, { LayoutSectionComponentProps } from './section';
 import LayoutSidebar, { LayoutSidebarProps } from './sidebar';
-import ComponentTrustBar, { ComponentTrustBarProps } from './trustBar';
 import Footer, { FooterProps } from '../footer';
 import Header, { HeaderProps } from '../header';
 import { Landing } from '../landing/Landing';
 import Paper, { PaperProps } from '../paper';
 import Sidebar, { SidebarProps } from '../sidebar';
-
-// Define interfaces for props
+import { TrustBar, TrustBarProps } from '../TrustBar';
 
 /**
  * Props for a generic component within a layout.
  */
-interface ComponentProps {
+type ComponentProps = {
     type: string;
     props?: Record<string, unknown>;
     children?: React.ReactNode;
-}
+};
 
 /**
  * Props for configuring a layout section.
  */
-interface LayoutSectionProps {
+type LayoutSectionProps = {
     type: string;
     props?: Record<string, unknown>;
     components?: ComponentProps[];
-}
+};
 
 /**
  * Props for configuring the PageGenerator component.
  */
-interface PageGeneratorProps {
+type PageGeneratorProps = {
     config: LayoutSectionProps[];
     containerStyles?: string;
-}
+};
 
 type ComponentTypeProps = PaperProps &
     HeaderProps &
     FooterProps &
     SidebarProps &
-    ComponentTrustBarProps;
+    TrustBarProps;
 
 // Component type to component mapping
 // ComponentTypeProps can be replaced with any also,
@@ -51,7 +49,7 @@ const componentRegistry: Record<string, React.FC<ComponentTypeProps>> = {
     footer: Footer,
     sidebar: Sidebar,
     paper: Paper,
-    componentTrustBar: ComponentTrustBar,
+    componentTrustBar: TrustBar,
     landing: Landing,
     // Add more components as needed
 };
