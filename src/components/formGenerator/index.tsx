@@ -101,7 +101,7 @@ const FormGenerator = <T extends FieldValues>({
     return (
         <form
             className="max-w-md mx-auto mt-8 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
-            onSubmit={void handleSubmit(onSubmit)}
+            onSubmit={(event) => void handleSubmit(onSubmit)(event)}
         >
             {formTitle && (
                 <h2 className="text-xl font-semibold text-center mb-2">
