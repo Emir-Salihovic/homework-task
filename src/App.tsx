@@ -1,12 +1,11 @@
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
 
 import { User } from 'types';
 
 import FormGenerator from './components/formGenerator';
 import List from './components/list';
-
 import './styles.css';
+import { createPostMutation, postValidationSchema } from './lib/api/posts';
 
 const URL = 'https://jsonplaceholder.typicode.com/users';
 
@@ -26,27 +25,12 @@ const renderUser = (user: User) => (
     </div>
 );
 
-const postValidationSchema = z.object({
-    title: z.string().min(2, 'Needs to be at least 2 characters long.'),
-    body: z.string().min(2, 'Needs to be at least 2 characters long.'),
-});
-
 type FormData = {
     title: string;
     body: string;
 };
 
 function App() {
-    const mutation = async (data?: FormData) => {
-        await fetch('https://jsonplaceholder.typicode.com/posts', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        });
-    };
-
     return (
         <main>
             <List
@@ -58,8 +42,10 @@ function App() {
 
             <FormGenerator
                 formTitle="Add a post"
-                useMutationFn={mutation}
-                mutationKey={['posts']}
+                successMessage="Post Added!"
+                useMutationFn={createPostMutation}
+                mutationKey={['add-post']}
+                // invalidateQueries={['posts']}
                 validationSchema={postValidationSchema}
                 renderForm={({
                     register,
