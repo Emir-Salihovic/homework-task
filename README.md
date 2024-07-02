@@ -1,3 +1,89 @@
+To run the project, follow these steps:
+
+### Installation
+
+1. **Install Node.js and npm (Node Package Manager):**
+    - Ensure Node.js version 18.0.0 or higher is installed on your computer. You can download it from [nodejs.org](https://nodejs.org/).
+2. **Install project dependencies:**
+
+    - Open your terminal or command prompt.
+    - Navigate to the project directory (`homework-task`).
+    - Run either of the following commands:
+
+        - Using npm:
+
+            ```
+            npm install
+
+            ```
+
+        - Using Yarn (if installed):
+
+            ```
+            yarn install
+
+            ```
+
+    This command installs all necessary dependencies listed in `package.json`.
+
+### Running the Project
+
+1. **Start the development server:**
+
+    - After installing dependencies, run the following command to start the development server:
+
+        - Using npm:
+
+            ```arduino
+            npm run dev
+
+            ```
+
+        - Using Yarn:
+
+            ```
+            yarn dev
+
+            ```
+
+    - This command starts the server using Vite on port 3000 (as configured in `scripts.dev`).
+
+### Other Useful Commands
+
+-   **Building the project for production:**
+
+    ```arduino
+    npm run build
+
+    ```
+
+    This command generates a production build of the project using Vite.
+
+-   **Linting (checking code quality):**
+
+    ```arduino
+    npm run lint
+
+    ```
+
+    Runs ESLint to check for coding standards and potential errors in JavaScript and TypeScript files.
+
+-   **Type checking (ensuring TypeScript correctness):**
+
+    ```arduino
+    npm run typecheck
+
+    ```
+
+    Runs TypeScript compiler (`tsc`) to check TypeScript files for type errors without emitting files.
+
+### Notes
+
+-   Ensure you have Node.js and npm (or Yarn) installed and properly configured before running the commands.
+-   Commands prefixed with `npm` can be replaced with `yarn` if you prefer using Yarn for package management.
+
+This setup allows you to easily install dependencies, run the development server, and perform necessary checks and builds for the `homework-task` project. Adjustments to configurations or additional commands may be needed based on specific project requirements or environments.
+
 ## Project Overview
 
 ### Components Used
