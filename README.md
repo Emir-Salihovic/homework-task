@@ -1,144 +1,187 @@
-## Complete the following tasks
+## PageGenerator Component
 
-### Transfer the project to TypeScript
+The `PageGenerator` component dynamically renders a page layout based on a configuration object.
 
-Your first task involves transitioning this project 
-from JavaScript to TypeScript. To ensure a robust 
-and type-safe codebase, please configure TypeScript
-with the following compiler options:
-* "noImplicitAny": true
-* "strict": true
-* "strictNullChecks": true
-* "noImplicitThis": true
+### Example Configuration
 
-Additionally, implement import aliases in your project
-configuration. Set up your imports to use the format
-***@homework-task/path/to/file.ts***.
+```jsx
+import PageGenerator from './PageGenerator';
 
-In the ***src/components*** folder, you will find several
-components. Your goal is to enhance these components with
-appropriate TypeScript interfaces and types.
-
-### Create a List Component
-
-Develop a React component that is both scalable and reusable,
-designed to fetch and display data from an API in a list
-format. The specific API endpoint to be used is
-https://jsonplaceholder.typicode.com/users. For each item 
-in the list, ensure that the following keys are displayed:
-***id***, ***name***, ***email***, ***dateOfBirth***, and ***phone***.
-
-
-### Create a Form Generator Component
-
-1. Develop a scalable and reusable React component with the
-following capabilities:
-
-* **Validation Schema:** Accept a validation schema prop to ensure form data adheres to specified rules.
-* **API Hook Call:** Incorporate an API hook that handles states such as data, isLoading, and isError.
-* **Callback Function for Form Rendering:** Implement a callback function prop (renderForm) that renders the form elements and handles their state appropriately.
-
-2. Component Implementation:
-* Utilize this component to create a form with two fields:
-  * Input Field (‘title’): A required field with a maximum character limit.
-  * Textarea Field (‘body’): Also a required field with a maximum character limit.
-* Both fields should display error messages if the input doesn't meet the criteria set by the validation schema.
-* For form submissions, use the POST method at https://jsonplaceholder.typicode.com/posts.
-
-Recommended libraries, but you can use whatever you prefer:
-* ***React Query:*** For handling API calls.
-* ***Zod:*** For defining the validation schema.
-* ***React Hook Form:*** For managing form state, submission, and logic.
-
-Alternatively, you're free to use any library or custom solution that aligns with the above requirements.
-
-Component Example **(this does not have to be the exact implementation)**:
-
-```tsx
-<CreateForm<ICreateCycleFormInputs>
-    useMutation={useSomeMutation}
-    validationSchema={someSchema}
-    successMessage="Successfully created something"
-    renderForm={({ register, errors }) => (
-        <>
-            <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="name"
-                label="Name"
-                error={!!errors.name}
-                helperText={errors.name?.message}
-                autoFocus
-                {...register('name')}
-            />
-        </>
-    )}
-/>
-```
-
-
-### Create a Page Generator Component
-Your task is to create a reusable React component for
-building web pages. This component should be designed 
-to handle a variety of page layouts and components 
-dynamically, based on the props it receives.
-* ***Dynamic Layout Handling:*** The component must handle different page layouts.
-* ***Scalability and Reusability:*** It should be easily scalable to accommodate future layout types and be reusable across different pages.
-* ***Prop Structure:*** The main prop is an array of objects, each representing a section of the page with its own layout and components.
-  * Each object in this array contains:
-    * type: identifying the layout type.
-    * components: an array of objects, each describing a component to be rendered in this section.
-    * props: properties specific to that layout (ex. background color)
-  * Each component object has:
-    * type: the type of the component (e.g., 'componentHero').
-    * props: properties specific to that component.
-
-You can use the components provided in src/components. If you desire, you can 
-add your own components or change the existing ones.
-
-Here is an example of the props that the component should accept:
-
-```ts
-const data = [
-    {
-        type: 'layoutSection',
-        props: { ...layoutProps},
-        components: [
-            {
-                type: 'componentHero',
-                props: {...componentProps},
-            },
-        ],
+const config = [
+  {
+    type: 'layoutSidebar',
+    props: { styles: 'bg-[#eee] h-screen w-[20%] relative text-white hidden md:block' },
+    components: [
+      { type: 'header', props: { title: 'Sidebar Header', styles: 'h-[78px] flex items-center' } },
+      { type: 'sidebar', props: { items: ['item 1', 'item 2', 'item 3'], styles: 'h-[calc(100%-178px)] bg-mainGreen' } },
+      { type: 'footer', props: { text: 'Sidebar Footer', styles: 'absolute bottom-0 w-full h-[100px] flex items-center bg-red' } },
+    ],
+  },
+  {
+    type: 'layoutSection',
+    props: { styles: 'bg-[#eee] h-screen w-full md:w-[80%] relative text-white' },
+    components: [
+      { type: 'header', props: { title: 'App Header', styles: 'h-[78px] flex items-center bg-red' } },
+      { type: 'paper', props: { styles: 'h-[calc(100%-178px)] bg-lightPurple overflow-y-scroll' }, children: 'Dynamic content' },
+      { type: 'footer', props: { text: 'App Footer', styles: 'absolute bottom-0 w-full h-[100px] flex items-center bg-primary' } },
+    ],
+  },
+  {
+    type: 'componentTrustBar',
+    props: {
+      title: 'Trust Bar',
+      description: 'This is a trust bar to showcase how the page generator works without a layout',
+,
+      styles: 'bg-yellow-100 p-4 w-[400px] hidden lg:block',
     },
-    {
-        type: 'layoutSection',
-        props: { ...layoutProps},
-        components: [
-            {
-                type: 'componentItemsShowcase',
-                props: {...componentProps},
-            },
-            {
-                type: 'componentTrustBar',
-                props: {...componentProps},
-            },
-        ],
-    },
+  },
 ];
 
+
+const App: React.FC = () => (
+  <PageGenerator config={config} containerStyles="page-container" />
+);
+
+export default App;
+
 ```
 
-### Additional Requirements
-You will have to complete all of these for your task to be considered done.
+### Configuration Details
 
-* Follow the eslint and prettier rules set by the project; you must not use any ts-ignore or disable eslint.
-* It must contain a Readme.md file that has instructions on how to run the project as well as a brief explanation of how you have implemented these features. In the project, there is already a Readme.md file present feel free to override it completely.
-* Your code must follow the latest rules and conventions
-* You have to have checks for typescript and eslint that disallow you to commit any changes that cause errors.
-* There should be no TypeScript or Eslint errors in your code.
-* Feel free to add your own touch to these tasks
-* Keep in mind that you will have to expand upon this solution in the technical interview
+-   **config**: Defines layout sections (`layoutSection`, `layoutSidebar`) and their components.
+    -   **type**: Type of layout section.
+    -   **components**: Array of components (`header`, `footer`, `sidebar`, `paper`).
+        -   **type**: Type of component.
+        -   **children**: Content to render within the component.
 
+### Component Mapping
 
-### Note: You can override this document
+Components (`header`, `footer`, `sidebar`, `paper`) are mapped using registries (`componentRegistry` and `layoutRegistry`) within the `PageGenerator` component.
+
+## FormGenerator Component
+
+The `FormGenerator` component simplifies form handling and submission using React Query and React Hook Form.
+
+### Props
+
+-   **formTitle** (`string`, optional): Title displayed above the form.
+-   **successMessage** (`string`, default: 'Form Submitted!'): Message shown upon successful form submission.
+-   **invalidateQueries** (`string[]`, optional): Queries to invalidate in React Query upon form submission.
+-   **mutationKey** (`string[]`): Unique key for the mutation operation.
+-   **validationSchema** (`ZodSchema<T>`): Validation schema for form data using Zod.
+-   **useMutationFn** (`(data?: T) => Promise<void>`): Function to execute the mutation operation.
+-   **renderForm** (`(props: RenderFormProps<T>) => React.ReactNode`): Function to render the form fields.
+
+### Usage Example
+
+```tsx
+import React from 'react';
+import { FormGenerator, RenderFormProps } from './FormGenerator'; // Adjust path as needed
+import { useMutation } from '@tanstack/react-query';
+import { z } from 'zod';
+
+// Define form data structure
+type FormData = {
+    username: string;
+    password: string;
+};
+
+// Define validation schema using Zod
+const validationSchema = z.object({
+    username: z.string().min(4, 'Username must be at least 4 characters'),
+    password: z.string().min(6, 'Password must be at least 6 characters'),
+});
+
+const App: React.FC = () => {
+    const { mutateAsync } = useMutation<void, Error, FormData>(
+        async (formData) => {
+            // Simulate async operation (replace with actual API call)
+            await new Promise((resolve) => setTimeout(resolve, 1000));
+        }
+    );
+
+    // Render the FormGenerator component
+    return (
+        <FormGenerator
+            formTitle="Login Form"
+            successMessage="Login Successful!"
+            mutationKey={['login']}
+            validationSchema={validationSchema}
+            useMutationFn={mutateAsync}
+            renderForm={({ register, errors }: RenderFormProps<FormData>) => (
+                <div>
+                    <input type="text" {...register('username')} />
+                    {errors.username && <span>{errors.username.message}</span>}
+                    <input type="password" {...register('password')} />
+                    {errors.password && <span>{errors.password.message}</span>}
+                </div>
+            )}
+        />
+    );
+};
+
+export default App;
+```
+
+### Features
+
+-   **Validation**: Automatically validates form data against the specified schema.
+-   **Error Handling**: Handles and displays validation errors using Zod.
+-   **Form Submission**: Uses React Query to manage asynchronous form submissions.
+-   **Mutation Reset**: Allows resetting the form state upon error with a reset button.
+
+## List Component
+
+The `List` component fetches data and renders a list based on the provided props using React Query.
+
+### Props
+
+-   **queryKey** (`QueryKey`): Unique key for the query operation.
+-   **renderItem** (`(item: T) => React.ReactNode`): Function to render each item in the list.
+-   **listTitle** (`string`): Title displayed above the rendered list.
+
+### Usage Example
+
+```tsx
+import React from 'react';
+import { List } from './List'; // Adjust path as needed
+import { useQueryClient } from '@tanstack/react-query';
+
+// Example usage with user data
+const UserList: React.FC = () => {
+    const queryClient = useQueryClient();
+
+    const renderUser = (user: User) => (
+        <div>
+            <strong>ID:</strong> {user.id}
+            <br />
+            <strong>Name:</strong> {user.name}
+            <br />
+            <strong>Username:</strong> {user.username}
+            <br />
+            <strong>Email:</strong> {user.email}
+            <br />
+            <strong>Phone:</strong> {user.phone}
+            <br />
+            <hr className="my-2" />
+        </div>
+    );
+
+    return (
+        <List
+            queryKey={['users']} // Query key for fetching user data
+            renderItem={renderUser} // Example renderItem function
+            listTitle="User List"
+        />
+    );
+};
+
+export default UserList;
+```
+
+### Features
+
+-   **Data Fetching**: Fetches data using React Query based on the provided `queryKey`.
+-   **Loading State**: Displays "Loading..." while data is being fetched.
+-   **Error Handling**: Shows an error message if there is an issue fetching data.
+-   **Rendering**: Renders each item in the list using the `renderItem` function provided.
