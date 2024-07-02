@@ -18,9 +18,15 @@
     -   **Error Handling**: Displays an error message if data fetching encounters issues, such as network errors or server failures.
     -   **Custom Rendering**: Utilizes a custom rendering function (`renderItem`) to render each item in the fetched list.
 -   **Page Layout Generation**:
+
     -   **Dynamic Layouts**: Generates page layouts dynamically based on a configuration object (`config`).
     -   **Component Mapping**: Maps layout types and standalone components to corresponding React components (`LayoutSection`, `LayoutSidebar`, `Header`, `Footer`, etc.) using registry objects (`layoutRegistry`, `componentRegistry`).
     -   **Flexibility**: Allows flexible configuration of page sections (`layoutSection`, `layoutSidebar`) and nested components (`Header`, `Footer`, etc.), accommodating various page structures and content arrangements.
+
+-   **Code Quality Standards**:
+
+-   **Husky Integration**: Utilizes Husky Git hooks to enforce code quality standards before committing code changes.
+-   **Pre-Commit Checks**: Prevents commits if TypeScript errors or linting errors are present in the codebase, ensuring consistent code quality and adherence to project standards.
 
 ### Key Points
 
